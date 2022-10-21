@@ -1,1 +1,14 @@
-<%= render @thaalis %>
+<h1 class="text-center">All Thaalis</h1>
+
+<table class="table table-hover table-striped mt-5">
+    <thead>
+        <tr>
+            <th scope="col">Thaali Number</th>
+            <th colspan="8" scope="col">Name</th>
+            <th scope="col">Size</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%= render @thaalis %>
+    </tbody>
+</table>
