@@ -50,6 +50,8 @@ class ThaalisController < ApplicationController
         @thaali = Thaali.find(params[:id])
         @thaali.destroy
         render turbo_stream: [
+            # an edge case where the current thaali is in the edit form and then delete button is triggered
+            turbo_stream.update("new-thaali-form", partial: "thaalis/form", locals: { thaali: Thaali.new }),
             turbo_stream.remove(@thaali),
             turbo_stream.update("thaali_counter", Thaali.count)
         ]
