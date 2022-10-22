@@ -3,11 +3,11 @@
     <td colspan="8"><%= thaali.owner %></td>
     <td><%= thaali.size %></td>
     <td>
-        <span class="inline">
+        <span>
             <%= link_to "Edit", edit_thaali_path(thaali), class: "btn btn-sm btn-primary" %>
         </span>
 
-        <span class="inline">
+        <span>
             <%= button_to "Delete", thaali_path(thaali), class: "btn btn-sm btn-danger", method: :delete, data: { turbo_confirm: "Delete thaali number #{thaali.number} entry?"},  form: {style: 'display:inline-block;'} %>
         </span>
     </td>
