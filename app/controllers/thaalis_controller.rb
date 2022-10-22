@@ -14,7 +14,8 @@ class ThaalisController < ApplicationController
         if @thaali.save
             render turbo_stream: [
                 turbo_stream.prepend("thaalis", @thaali ),
-                turbo_stream.update("new-thaali-form", partial: "thaalis/form", locals: { thaali: Thaali.new })
+                turbo_stream.update("new-thaali-form", partial: "thaalis/form", locals: { thaali: Thaali.new }),
+                turbo_stream.update("thaali_counter", html: "#{ Thaali.count }")
             ]
         else
             render turbo_stream: [
@@ -49,7 +50,8 @@ class ThaalisController < ApplicationController
         @thaali = Thaali.find(params[:id])
         @thaali.destroy
         render turbo_stream: [
-            turbo_stream.remove(@thaali)
+            turbo_stream.remove(@thaali),
+            turbo_stream.update("thaali_counter", html: "#{ Thaali.count }")
         ]
     end
 
