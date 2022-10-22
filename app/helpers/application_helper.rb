@@ -3,7 +3,7 @@ module ApplicationHelper
         html = []
         if form_obj.errors[field].any?
             html << form_obj.errors[field].map do | msg |
-                tag.small(msg, class: "text-danger")
+                tag.div(msg, class: "text-danger text-center")
             end
         end
         html.join.html_safe
