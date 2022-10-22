@@ -45,6 +45,14 @@ class ThaalisController < ApplicationController
         end
     end
 
+    def destroy
+        @thaali = Thaali.find(params[:id])
+        @thaali.destroy
+        render turbo_stream: [
+            turbo_stream.remove(@thaali)
+        ]
+    end
+
     private
         def thaali_params
             params.require(:thaali).permit(:number, :owner, :size)
