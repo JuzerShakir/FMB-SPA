@@ -12,7 +12,13 @@
 
   <body>
     <div class="container mt-5">
+
+      <div id="flash" style="position:absolute; z-index: 2; right: 10px;">
+        <%= render "shared/flash" %>
+      </div>
+
       <%= yield %>
+
     </div>
   </body>
 </html>

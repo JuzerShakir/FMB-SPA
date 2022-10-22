@@ -12,10 +12,12 @@ class ThaalisController < ApplicationController
         @thaali = Thaali.new(thaali_params)
 
         if @thaali.save
+            flash.now[:notice] = "Thaali number: #{@thaali.number} created!"
             render turbo_stream: [
                 turbo_stream.prepend("thaalis", @thaali ),
                 turbo_stream.update("new-thaali-form", partial: "thaalis/form", locals: { thaali: Thaali.new }),
-                turbo_stream.update("thaali_counter", Thaali.count)
+                turbo_stream.update("thaali_counter", Thaali.count),
+                turbo_stream.prepend("flash", partial: "shared/flash")
             ]
         else
             render turbo_stream: [
@@ -34,10 +36,12 @@ class ThaalisController < ApplicationController
 
     def update
         @thaali = Thaali.find(params[:id])
+        flash.now[:notice] = "Thaali number: #{@thaali.number} updated!"
         if @thaali.update(thaali_params)
             render turbo_stream: [
                 turbo_stream.prepend("thaalis", @thaali ),
-                turbo_stream.update("new-thaali-form", partial: "thaalis/form", locals: { thaali: Thaali.new })
+                turbo_stream.update("new-thaali-form", partial: "thaalis/form", locals: { thaali: Thaali.new }),
+                turbo_stream.prepend("flash", partial: "shared/flash")
             ]
         else
             render turbo_stream: [
@@ -49,11 +53,13 @@ class ThaalisController < ApplicationController
     def destroy
         @thaali = Thaali.find(params[:id])
         @thaali.destroy
+        flash.now[:notice] = "Thaali number: #{@thaali.number} is destroyed!"
         render turbo_stream: [
             # an edge case where the current thaali is in the edit form and then delete button is triggered
             turbo_stream.update("new-thaali-form", partial: "thaalis/form", locals: { thaali: Thaali.new }),
             turbo_stream.remove(@thaali),
-            turbo_stream.update("thaali_counter", Thaali.count)
+            turbo_stream.update("thaali_counter", Thaali.count),
+            turbo_stream.prepend("flash", partial: "shared/flash")
         ]
     end
 
