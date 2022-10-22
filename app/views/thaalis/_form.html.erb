@@ -1,13 +1,13 @@
-<%= form_with(model: @thaali, id: dom_id(@thaali)) do | f | %>
+<%= form_with(model: thaali, id: dom_id(thaali)) do | f | %>
   <div class="row gy-5 my-5 justify-content-md-center">
     <div class="col-2 mx-auto">
       <%= f.number_field :number, class:"form-control", placeholder: "Thaali Number" %>
-      <%= inline_error_for(:number, @thaali) %>
+      <%= inline_error_for(:number, thaali) %>
     </div>
 
     <div class="col-5 mx-auto">
       <%= f.text_field :owner, class:"form-control", placeholder: "Shk. Fakhruddin Nakhudawala" %>
-      <%= inline_error_for(:owner, @thaali) %>
+      <%= inline_error_for(:owner, thaali) %>
     </div>
 
     <div class="col-2 mx-auto">
@@ -16,7 +16,7 @@
         <option value="medium">Medium</option>
         <option value="large">Large</option>
       </select>
-      <%= inline_error_for(:size, @thaali) %>
+      <%= inline_error_for(:size, thaali) %>
     </div>
 
     <div class="col-2">

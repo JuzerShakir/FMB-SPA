@@ -14,7 +14,7 @@ class ThaalisController < ApplicationController
         if @thaali.save
             render turbo_stream: [
                 turbo_stream.prepend("thaalis", @thaali ),
-                turbo_stream.replace("new_thaali", partial: "thaalis/form")
+                turbo_stream.replace("new-thaali-form", partial: "thaalis/form", locals: { thaali: Thaali.new })
             ]
         else
             render turbo_stream: [
