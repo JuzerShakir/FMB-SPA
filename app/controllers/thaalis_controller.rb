@@ -14,7 +14,29 @@ class ThaalisController < ApplicationController
         if @thaali.save
             render turbo_stream: [
                 turbo_stream.prepend("thaalis", @thaali ),
-                turbo_stream.replace("new-thaali-form", partial: "thaalis/form", locals: { thaali: Thaali.new })
+                turbo_stream.update("new-thaali-form", partial: "thaalis/form", locals: { thaali: Thaali.new })
+            ]
+        else
+            render turbo_stream: [
+                turbo_stream.replace(@thaali, partial: "thaalis/form", locals: { thaali: @thaali } )
+            ]
+        end
+    end
+
+    def edit
+        @thaali = Thaali.find(params[:id])
+
+        render turbo_stream: [
+            turbo_stream.update("new-thaali-form", partial: "thaalis/form", locals: { thaali: @thaali })
+        ]
+    end
+
+    def update
+        @thaali = Thaali.find(params[:id])
+        if @thaali.update(thaali_params)
+            render turbo_stream: [
+                turbo_stream.prepend("thaalis", @thaali ),
+                turbo_stream.update("new-thaali-form", partial: "thaalis/form", locals: { thaali: Thaali.new })
             ]
         else
             render turbo_stream: [
