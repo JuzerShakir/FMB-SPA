@@ -1,31 +1,27 @@
-<form class="row gy-5 gx-3 mt-5">
-  <div class="col-sm-3">
-    <div class="input-group">
-      <div class="input-group-text">Thaali #</div>
-      <input type="text" class="form-control" placeholder="53">
+<%= form_with(model: @thaali, id: dom_id(@thaali)) do | f | %>
+  <div class="row gy-5 my-5 justify-content-md-center">
+    <div class="col-2 mx-auto">
+      <%= f.number_field :number, class:"form-control", placeholder: "Thaali Number" %>
+      <%= inline_error_for(:number, @thaali) %>
+    </div>
+
+    <div class="col-5 mx-auto">
+      <%= f.text_field :owner, class:"form-control", placeholder: "Shk. Fakhruddin Nakhudawala" %>
+      <%= inline_error_for(:owner, @thaali) %>
+    </div>
+
+    <div class="col-2 mx-auto">
+      <select name="thaali[size]" id="thaali_size" class="form-select">
+        <option selected value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large">Large</option>
+      </select>
+      <%= inline_error_for(:size, @thaali) %>
+    </div>
+
+    <div class="col-2">
+      <%= f.submit "Create Thaali", class: "btn btn-success" %>
     </div>
   </div>
 
-  <div class="col-sm-5">
-    <div class="input-group">
-      <div class="input-group-text">Name</div>
-      <input type="text" class="form-control" placeholder="Shk. Fakhruddin Nakhudawala">
-    </div>
-  </div>
-
-  <div class="col-sm-2">
-    <div class="input-group">
-      <div class="input-group-text">Size</div>
-        <select class="form-select">
-          <option selected>Choose</option>
-          <option value="0">Small</option>
-          <option value="1">Medium</option>
-          <option value="2">Large</option>
-        </select>
-    </div>
-  </div>
-
-  <div class="col-sm-2 d-flex justify-content-center">
-    <button type="submit" class="btn btn-success">Create Thaali</button>
-  </div>
-</form>
+<% end %>
