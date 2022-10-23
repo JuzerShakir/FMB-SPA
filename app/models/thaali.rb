@@ -5,5 +5,7 @@ class Thaali < ApplicationRecord
 
     validates :number, uniqueness: true, numericality: { greater_than_or_equal_to: 1 }
 
+    validates :owner, format: { with: /\A[a-z .]+\z/i, message: "only alphabets allowed" }
+
     scope :in_sequence, -> { order(number: :asc) }
 end
