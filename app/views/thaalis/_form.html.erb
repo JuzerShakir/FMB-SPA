@@ -1,13 +1,16 @@
 <%= form_with(model: thaali, id: dom_id(thaali)) do | f | %>
   <div class="row gy-5 my-5 justify-content-md-center">
     <div class="col-2 mx-auto">
-      <%= f.number_field :number, class:"form-control", placeholder: "Thaali Number" %>
-      <%= inline_error_for(:number, thaali) %>
+      <%= f.number_field :number, class:"form-control", placeholder: "Thaali Number", id: "number_field"%>
+      <div class="valid-feedback">Looks good!</div>
+     <%= inline_error_for(:number, thaali) %>
     </div>
 
     <div class="col-5 mx-auto">
-      <%= f.text_field :owner, class:"form-control", placeholder: "Shk. Fakhruddin Nakhudawala" %>
-      <%= inline_error_for(:owner, thaali) %>
+      <%= f.text_field :owner, class:"form-control", placeholder: "Shk. Fakhruddin Nakhudawala", id: "owner_field" %>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Only alphabets allowed!</div>
+     <%= inline_error_for(:owner, thaali) %>
     </div>
 
     <div class="col-2 mx-auto">
