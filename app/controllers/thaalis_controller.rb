@@ -36,8 +36,9 @@ class ThaalisController < ApplicationController
 
     def update
         @thaali = Thaali.find(params[:id])
-        flash.now[:notice] = "Thaali number: #{@thaali.number} updated!"
+
         if @thaali.update(thaali_params)
+            flash.now[:notice] = "Thaali number: #{@thaali.number} updated!"
             render turbo_stream: [
                 turbo_stream.prepend("thaalis", @thaali ),
                 turbo_stream.update("new-thaali-form", partial: "thaalis/form", locals: { thaali: Thaali.new }),
