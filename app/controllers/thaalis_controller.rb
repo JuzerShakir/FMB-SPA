@@ -1,6 +1,6 @@
 class ThaalisController < ApplicationController
     def index
-        @thaalis = Thaali.all
+        @thaalis = Thaali.in_sequence
         @thaali = Thaali.new
     end
 
