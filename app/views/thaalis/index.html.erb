@@ -4,7 +4,7 @@
     Total Number of thaalis distributed: <span class="fw-bold" id="thaali_counter"><%= Thaali.count %></span>
 </p>
 
-<turbo_frame id='new-thaali-form'>
+<turbo_frame id='new-thaali-form' data-controller="live-validation">
     <%= render 'thaalis/form', thaali: @thaali %>
 </turbo_frame>
 
