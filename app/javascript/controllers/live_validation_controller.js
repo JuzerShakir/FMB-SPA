@@ -9,36 +9,36 @@ export default class extends Controller {
   number() {
     const field = this.numberTarget.firstElementChild;
     const id = this.numberTarget.dataset.value;
-    const number_rgx = /^\d+$/;
-    let field_value = field.value;
-    let field_classes = field.classList;
-    let invalid_feedback = this.numberTarget.querySelector(".invalid-feedback");
+    const numberRgx = /^\d+$/;
+    let fieldValue = field.value;
+    let fieldClasses = field.classList;
+    let invalidFeedback = this.numberTarget.querySelector(".invalid-feedback");
     const submitButton = document.querySelector(".submit-button");
 
-    const remove_class = (name) => field_classes.remove(name);
-    const add_class = (name) => field_classes.add(name);
+    const remove_class = (name) => fieldClasses.remove(name);
+    const add_class = (name) => fieldClasses.add(name);
 
     const enableDisableSubmit = () => {
       let ownerFieldValue = this.ownerTarget.firstElementChild.value;
-      const owner_rgx = /^[a-z .]+$/i;
+      const ownerRgx = /^[a-z .]+$/i;
 
-      if (owner_rgx.test(ownerFieldValue) && ownerFieldValue) {
+      if (ownerRgx.test(ownerFieldValue) && ownerFieldValue) {
         submitButton.classList.remove("disabled");
       }
     };
 
     if (id) {
-      if (number_rgx.test(field_value)) {
+      if (numberRgx.test(fieldValue)) {
         add_class("is-valid");
         remove_class("is-invalid");
         enableDisableSubmit();
       } else {
         remove_class("is-valid");
         add_class("is-invalid");
-        invalid_feedback.textContent = "Can't be blank!";
+        invalidFeedback.textContent = "Can't be blank!";
         submitButton.classList.add("disabled");
       }
-    } else if (number_rgx.test(field_value)) {
+    } else if (numberRgx.test(fieldValue)) {
       add_class("is-valid");
       enableDisableSubmit();
     } else {
@@ -51,45 +51,45 @@ export default class extends Controller {
   owner() {
     const field = this.ownerTarget.firstElementChild;
     const id = this.ownerTarget.dataset.value;
-    const owner_rgx = /^[a-z .]+$/i;
-    let field_value = field.value;
-    let field_classes = field.classList;
-    let invalid_feedback = this.ownerTarget.querySelector(".invalid-feedback");
+    const ownerRgx = /^[a-z .]+$/i;
+    let fieldValue = field.value;
+    let fieldClasses = field.classList;
+    let invalidFeedback = this.ownerTarget.querySelector(".invalid-feedback");
     const submitButton = document.querySelector(".submit-button");
 
-    const remove_class = (name) => field_classes.remove(name);
-    const add_class = (name) => field_classes.add(name);
+    const remove_class = (name) => fieldClasses.remove(name);
+    const add_class = (name) => fieldClasses.add(name);
 
     const enableDisableSubmit = () => {
       let numberFieldValue = this.numberTarget.firstElementChild.value;
-      const number_rgx = /^\d+$/;
+      const numberRgx = /^\d+$/;
 
-      if (number_rgx.test(numberFieldValue) && numberFieldValue) {
+      if (numberRgx.test(numberFieldValue) && numberFieldValue) {
         submitButton.classList.remove("disabled");
       }
     };
 
     const verify_fields = () => {
-      if (owner_rgx.test(field_value)) {
+      if (ownerRgx.test(fieldValue)) {
         remove_class("is-invalid");
         add_class("is-valid");
         enableDisableSubmit();
       } else {
         remove_class("is-valid");
         add_class("is-invalid");
-        invalid_feedback.textContent = "Only alphabets allowed!";
+        invalidFeedback.textContent = "Only alphabets allowed!";
         submitButton.classList.add("disabled");
       }
     };
 
-    if (field_value && id) {
+    if (fieldValue && id) {
       verify_fields();
     } else if (id) {
       remove_class("is-valid");
       add_class("is-invalid");
       submitButton.classList.add("disabled");
-      invalid_feedback.textContent = "Can't be blank!";
-    } else if (field_value) {
+      invalidFeedback.textContent = "Can't be blank!";
+    } else if (fieldValue) {
       verify_fields();
     } else {
       remove_class("is-valid");
