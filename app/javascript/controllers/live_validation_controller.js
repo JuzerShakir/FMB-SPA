@@ -35,6 +35,7 @@ export default class extends Controller {
     if (id) {
       if (number_rgx.test(field_value)) {
         add_class("is-valid");
+        remove_class("is-invalid");
       } else {
         remove_class("is-valid");
         add_class("is-invalid");
