@@ -3,7 +3,7 @@
 
     <div class="col-2 mx-auto" data-action="input->live-validation#number" data-live-validation-target="number" data-value=<%="#{thaali.id}"%>>
 
-      <%= f.number_field :number, class:"form-control", placeholder: "Thaali Number", id: "number_field"%>
+      <%= f.number_field :number, class:"form-control", placeholder: "Thaali Number"%>
       <div class="valid-feedback">Looks good!</div>
       <div class="invalid-feedback">Can't be empty</div>
       <%= inline_error_for(:number, thaali) %>
@@ -11,7 +11,7 @@
 
     <div class="col-5 mx-auto" data-action="input->live-validation#owner" data-live-validation-target="owner" data-value=<%="#{thaali.id}"%>>
 
-      <%= f.text_field :owner, class:"form-control", placeholder: "Shk. Fakhruddin Nakhudawala", id: "owner_field"%>
+      <%= f.text_field :owner, class:"form-control", placeholder: "Shk. Fakhruddin Nakhudawala"%>
       <div class="valid-feedback">Looks good!</div>
       <div class="invalid-feedback"></div>
       <%= inline_error_for(:owner, thaali) %>
@@ -27,7 +27,7 @@
     </div>
 
     <div class="col-2">
-      <%= f.submit class: "btn btn-success" %>
+      <%= f.submit class: "btn btn-success submit-button disabled" %>
     </div>
   </div>
 
