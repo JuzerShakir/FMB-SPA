@@ -12,7 +12,7 @@ export default class extends Controller {
     const number_rgx = /^\d+$/;
     let field_value = field.value;
     let field_classes = field.classList;
-    let invalid_feedback = this.ownerTarget.querySelector(".invalid-feedback");
+    let invalid_feedback = this.numberTarget.querySelector(".invalid-feedback");
 
     const remove_class = (name) => field_classes.remove(name);
     const add_class = (name) => field_classes.add(name);
