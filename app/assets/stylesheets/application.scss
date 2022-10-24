@@ -27,7 +27,11 @@
 #notice {
   background-color: rgba(0, 0, 0, 0.737);
   color: rgb(0, 255, 0);
-  font-size: large;
+  font-size: larger;
   padding: 15px;
   border-radius: 25px;
+}
+
+.tiny {
+  font-size: smaller;
 }
