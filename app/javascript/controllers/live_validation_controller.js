@@ -4,13 +4,9 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["number", "owner"];
 
-  connect() {
-    var number = false;
-    var owner = false;
-  }
+  connect() {}
 
   number() {
-    console.log(this.ownerTarget);
     const field = this.numberTarget.firstElementChild;
     const id = this.numberTarget.dataset.value;
     const number_rgx = /^\d+$/;
