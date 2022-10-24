@@ -14,7 +14,6 @@ class ThaalisController < ApplicationController
         if @thaali.save
             flash.now[:notice] = "Thaali number: #{@thaali.number} created!"
             render turbo_stream: [
-                turbo_stream.prepend("thaalis", @thaali ),
                 turbo_stream.update("new-thaali-form", partial: "thaalis/form", locals: { thaali: Thaali.new }),
                 turbo_stream.update("thaali_counter", Thaali.count),
                 turbo_stream.prepend("flash", partial: "shared/flash")
@@ -40,7 +39,6 @@ class ThaalisController < ApplicationController
         if @thaali.update(thaali_params)
             flash.now[:notice] = "Thaali number: #{@thaali.number} updated!"
             render turbo_stream: [
-                turbo_stream.prepend("thaalis", @thaali ),
                 turbo_stream.update("new-thaali-form", partial: "thaalis/form", locals: { thaali: Thaali.new }),
                 turbo_stream.prepend("flash", partial: "shared/flash")
             ]
@@ -58,7 +56,6 @@ class ThaalisController < ApplicationController
         render turbo_stream: [
             # an edge case where the current thaali is in the edit form and then delete button is triggered
             turbo_stream.update("new-thaali-form", partial: "thaalis/form", locals: { thaali: Thaali.new }),
-            turbo_stream.remove(@thaali),
             turbo_stream.update("thaali_counter", Thaali.count),
             turbo_stream.prepend("flash", partial: "shared/flash")
         ]
