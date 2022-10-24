@@ -23,7 +23,6 @@ export default class extends Controller {
     const add_class = (name) => field_classes.add(name);
 
     const enableDisableSubmit = () => {
-      // let numberFieldValue = this.numberTarget.firstElementChild.value;
       let ownerFieldValue = this.ownerTarget.firstElementChild.value;
       const owner_rgx = /^[a-z .]+$/i;
 
@@ -36,10 +35,12 @@ export default class extends Controller {
       if (number_rgx.test(field_value)) {
         add_class("is-valid");
         remove_class("is-invalid");
+        enableDisableSubmit();
       } else {
         remove_class("is-valid");
         add_class("is-invalid");
         invalid_feedback.textContent = "Can't be blank!";
+        submitButton.classList.add("disabled");
       }
     } else if (number_rgx.test(field_value)) {
       add_class("is-valid");
@@ -65,7 +66,6 @@ export default class extends Controller {
 
     const enableDisableSubmit = () => {
       let numberFieldValue = this.numberTarget.firstElementChild.value;
-      // let ownerFieldValue = this.ownerTarget.firstElementChild.value;
       const number_rgx = /^\d+$/;
 
       if (number_rgx.test(numberFieldValue) && numberFieldValue) {
@@ -82,6 +82,7 @@ export default class extends Controller {
         remove_class("is-valid");
         add_class("is-invalid");
         invalid_feedback.textContent = "Only alphabets allowed!";
+        submitButton.classList.add("disabled");
       }
     };
 
@@ -90,6 +91,7 @@ export default class extends Controller {
     } else if (id) {
       remove_class("is-valid");
       add_class("is-invalid");
+      submitButton.classList.add("disabled");
       invalid_feedback.textContent = "Can't be blank!";
     } else if (field_value) {
       verify_fields();
