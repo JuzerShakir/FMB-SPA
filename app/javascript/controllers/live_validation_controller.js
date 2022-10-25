@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="live-validation"
 export default class extends Controller {
-  static targets = ["number", "owner"];
+  static targets = ["number", "owner", "size"];
 
   connect() {}
 
@@ -20,9 +20,15 @@ export default class extends Controller {
 
     const enableDisableSubmit = () => {
       let ownerFieldValue = this.ownerTarget.firstElementChild.value;
+      let sizeFieldValue = this.sizeTarget.firstElementChild.value;
+      const accepted_size = ["small", "medium", "large"];
       const ownerRgx = /^[a-z .]+$/i;
 
-      if (ownerRgx.test(ownerFieldValue) && ownerFieldValue) {
+      if (
+        ownerRgx.test(ownerFieldValue) &&
+        ownerFieldValue &&
+        accepted_size.includes(sizeFieldValue)
+      ) {
         submitButton.classList.remove("disabled");
       }
     };
@@ -62,9 +68,15 @@ export default class extends Controller {
 
     const enableDisableSubmit = () => {
       let numberFieldValue = this.numberTarget.firstElementChild.value;
+      let sizeFieldValue = this.sizeTarget.firstElementChild.value;
+      const accepted_size = ["small", "medium", "large"];
       const numberRgx = /^\d+$/;
 
-      if (numberRgx.test(numberFieldValue) && numberFieldValue) {
+      if (
+        numberRgx.test(numberFieldValue) &&
+        numberFieldValue &&
+        accepted_size.includes(sizeFieldValue)
+      ) {
         submitButton.classList.remove("disabled");
       }
     };
@@ -91,6 +103,56 @@ export default class extends Controller {
       invalidFeedback.textContent = "Can't be blank!";
     } else if (fieldValue) {
       verify_fields();
+    } else {
+      remove_class("is-valid");
+      remove_class("is-invalid");
+      submitButton.classList.add("disabled");
+    }
+  }
+
+  size() {
+    const field = this.sizeTarget.firstElementChild;
+    const id = this.sizeTarget.dataset.value;
+    let fieldValue = field.value;
+    const accepted_size = ["small", "medium", "large"];
+
+    let fieldClasses = field.classList;
+    let invalidFeedback = this.sizeTarget.querySelector(".invalid-feedback");
+    const submitButton = document.querySelector(".submit-button");
+
+    const remove_class = (name) => fieldClasses.remove(name);
+    const add_class = (name) => fieldClasses.add(name);
+
+    const enableDisableSubmit = () => {
+      let ownerFieldValue = this.ownerTarget.firstElementChild.value;
+      let numberFieldValue = this.numberTarget.firstElementChild.value;
+      const ownerRgx = /^[a-z .]+$/i;
+      const numberRgx = /^\d+$/;
+
+      if (
+        ownerRgx.test(ownerFieldValue) &&
+        ownerFieldValue &&
+        numberRgx.test(numberFieldValue) &&
+        numberFieldValue
+      ) {
+        submitButton.classList.remove("disabled");
+      }
+    };
+
+    if (id) {
+      if (accepted_size.includes(fieldValue)) {
+        add_class("is-valid");
+        remove_class("is-invalid");
+        enableDisableSubmit();
+      } else {
+        remove_class("is-valid");
+        add_class("is-invalid");
+        invalidFeedback.textContent = "Please select a valid state!";
+        submitButton.classList.add("disabled");
+      }
+    } else if (accepted_size.includes(fieldValue)) {
+      add_class("is-valid");
+      enableDisableSubmit();
     } else {
       remove_class("is-valid");
       remove_class("is-invalid");

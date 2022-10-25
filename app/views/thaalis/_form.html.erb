@@ -17,12 +17,14 @@
       <%= inline_error_for(:owner, thaali) %>
     </div>
 
-    <div class="col-2 mx-auto">
+    <div class="col-2 mx-auto" data-action="input->live-validation#size" data-live-validation-target="size" data-value=<%="#{thaali.id}"%>>
       <select name="thaali[size]" id="thaali_size" class="form-select">
-        <option selected value="small">Small</option>
+        <option value="">Choose</option>
+        <option value="small">Small</option>
         <option value="medium">Medium</option>
         <option value="large">Large</option>
       </select>
+      <div class="invalid-feedback"></div>
       <%= inline_error_for(:size, thaali) %>
     </div>
 
