@@ -7,7 +7,8 @@
       <%= f.label "Thaali #", for: "floatingInput" , class: "ps-4 text-secondary"%>
 
       <div class="valid-feedback">Looks good!</div>
-      <div id="not-unique" class="text-danger" style="font-size:smaller"></div>
+      <div class="invalid-feedback"></div>
+      <div id="not-unique" class="text-danger" style="font-size:small"></div>
       <%= inline_error_for(:number, thaali) %>
     </div>
 
