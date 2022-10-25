@@ -1,31 +1,37 @@
 <%= form_with(model: thaali, id: dom_id(thaali)) do | f | %>
   <div class="row gy-5 my-5 justify-content-md-center">
 
-    <div class="col-2 mx-auto" data-action="input->live-validation#number" data-live-validation-target="number" data-value=<%="#{thaali.id}"%>>
+    <div class="col-2 mx-auto form-floating" data-action="input->live-validation#number" data-live-validation-target="number" data-value=<%="#{thaali.id}"%>>
 
-      <%= f.number_field :number, class:"form-control", placeholder: "Thaali Number"%>
+      <%= f.number_field :number, class:"form-control", placeholder: "53", id: "floatingInput"%>
+      <%= f.label "Thaali #", for: "floatingInput" , class: "ps-4 text-secondary"%>
+
       <div class="valid-feedback">Looks good!</div>
-      <div class="invalid-feedback">Can't be empty</div>
       <%= inline_error_for(:number, thaali) %>
     </div>
 
-    <div class="col-5 mx-auto" data-action="input->live-validation#owner" data-live-validation-target="owner" data-value=<%="#{thaali.id}"%>>
+    <div class="col-5 mx-auto form-floating" data-action="input->live-validation#owner" data-live-validation-target="owner" data-value=<%="#{thaali.id}"%>>
 
-      <%= f.text_field :owner, class:"form-control", placeholder: "Shk. Fakhruddin Nakhudawala"%>
+      <%= f.text_field :owner, class:"form-control", placeholder: "Juzer Shakir", id: "floatingInput"%>
+      <%= f.label "Name", for: "floatingInput" , class: "ps-4 text-secondary"%>
+
       <div class="valid-feedback">Looks good!</div>
       <div class="invalid-feedback"></div>
       <%= inline_error_for(:owner, thaali) %>
     </div>
 
-    <div class="col-2 mx-auto" data-action="input->live-validation#size" data-live-validation-target="size" data-value=<%="#{thaali.id}"%>>
+    <div class="col-2 mx-auto form-floating" data-action="input->live-validation#size" data-live-validation-target="size" data-value=<%="#{thaali.id}"%>>
+
       <%= f.collection_select :size, Thaali.sizes.keys.map{ |size| [size, size.humanize]}, :first, :second, {prompt: "Choose"}, { class: "form-select"} %>
+      <%= f.label "Thaali Size", for: "floatingInput" , class: "ps-4 text-secondary"%>
+
       <div class="valid-feedback">Looks good!</div>
       <div class="invalid-feedback"></div>
       <%= inline_error_for(:size, thaali) %>
     </div>
 
     <div class="col-2">
-      <%= f.submit class: "btn btn-success submit-button disabled" %>
+      <%= f.submit class: "btn btn-lg btn-success submit-button disabled mt-1" %>
     </div>
   </div>
 <% end %>
