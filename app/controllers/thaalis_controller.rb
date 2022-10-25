@@ -13,7 +13,7 @@ class ThaalisController < ApplicationController
 
         if params[:commit] == "Validate"
             if Thaali.pluck(:number).include?(@thaali.number)
-                render turbo_stream: [ turbo_stream.update("not-unique", "but the thaali number is taken") ]
+                render turbo_stream: [ turbo_stream.update("not-unique", "thaali number is taken") ]
             else
                 render turbo_stream: [ turbo_stream.update("not-unique", "") ]
             end
