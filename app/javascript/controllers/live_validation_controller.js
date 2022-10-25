@@ -14,11 +14,19 @@ export default class extends Controller {
     let fieldClasses = field.classList;
     let invalidFeedback = this.numberTarget.querySelector(".invalid-feedback");
     const submitButton = document.querySelector(".submit-button");
+    const validateButton = document.querySelector(".validate-number");
 
     const remove_class = (name) => fieldClasses.remove(name);
     const add_class = (name) => fieldClasses.add(name);
 
-    const enableDisableSubmit = () => {
+    const checkUnique = () => {
+      clearTimeout(this.checkUnique);
+      this.checkUnique = setTimeout(() => {
+        validateButton.click();
+      }, 500);
+    };
+
+    const enableSubmit = () => {
       let ownerFieldValue = this.ownerTarget.firstElementChild.value;
       let sizeFieldValue = this.sizeTarget.firstElementChild.value;
       const accepted_size = ["small", "medium", "large"];
@@ -33,27 +41,39 @@ export default class extends Controller {
       }
     };
 
-    if (id) {
-      if (numberRgx.test(fieldValue)) {
-        add_class("is-valid");
+    checkUnique();
+
+    clearTimeout(this.verifyInput);
+    this.verifyInput = setTimeout(() => {
+      let numberIsUniqueMessage =
+        document.querySelector("#not-unique").textContent;
+
+      if (id) {
+        if (numberRgx.test(fieldValue) && !numberIsUniqueMessage) {
+          add_class("is-valid");
+          remove_class("is-invalid");
+          enableSubmit();
+        } else {
+          remove_class("is-valid");
+          add_class("is-invalid");
+          invalidFeedback.textContent =
+            fieldValue == "" ? "Can't be blank!" : "";
+          submitButton.classList.add("disabled");
+        }
+      } else if (numberRgx.test(fieldValue) && !numberIsUniqueMessage) {
         remove_class("is-invalid");
-        submit_validateButton();
-        enableDisableSubmit();
-      } else {
+        add_class("is-valid");
+        enableSubmit();
+      } else if (numberRgx.test(fieldValue)) {
         remove_class("is-valid");
         add_class("is-invalid");
-        invalidFeedback.textContent = "Can't be blank!";
+        submitButton.classList.add("disabled");
+      } else {
+        remove_class("is-valid");
+        remove_class("is-invalid");
         submitButton.classList.add("disabled");
       }
-    } else if (numberRgx.test(fieldValue)) {
-      add_class("is-valid");
-      submit_validateButton();
-      enableDisableSubmit();
-    } else {
-      remove_class("is-valid");
-      remove_class("is-invalid");
-      submitButton.classList.add("disabled");
-    }
+    }, 600);
   }
 
   owner() {
@@ -64,11 +84,13 @@ export default class extends Controller {
     let fieldClasses = field.classList;
     let invalidFeedback = this.ownerTarget.querySelector(".invalid-feedback");
     const submitButton = document.querySelector(".submit-button");
+    const numberIsUniqueMessage =
+      document.querySelector("#not-unique").textContent;
 
     const remove_class = (name) => fieldClasses.remove(name);
     const add_class = (name) => fieldClasses.add(name);
 
-    const enableDisableSubmit = () => {
+    const enableSubmit = () => {
       let numberFieldValue = this.numberTarget.firstElementChild.value;
       let sizeFieldValue = this.sizeTarget.firstElementChild.value;
       const accepted_size = ["small", "medium", "large"];
@@ -77,6 +99,7 @@ export default class extends Controller {
       if (
         numberRgx.test(numberFieldValue) &&
         numberFieldValue &&
+        !numberIsUniqueMessage &&
         accepted_size.includes(sizeFieldValue)
       ) {
         submitButton.classList.remove("disabled");
@@ -87,7 +110,7 @@ export default class extends Controller {
       if (ownerRgx.test(fieldValue)) {
         remove_class("is-invalid");
         add_class("is-valid");
-        enableDisableSubmit();
+        enableSubmit();
       } else {
         remove_class("is-valid");
         add_class("is-invalid");
@@ -117,7 +140,8 @@ export default class extends Controller {
     const id = this.sizeTarget.dataset.value;
     let fieldValue = field.value;
     const accepted_size = ["small", "medium", "large"];
-
+    const numberIsUniqueMessage =
+      document.querySelector("#not-unique").textContent;
     let fieldClasses = field.classList;
     let invalidFeedback = this.sizeTarget.querySelector(".invalid-feedback");
     const submitButton = document.querySelector(".submit-button");
@@ -125,7 +149,7 @@ export default class extends Controller {
     const remove_class = (name) => fieldClasses.remove(name);
     const add_class = (name) => fieldClasses.add(name);
 
-    const enableDisableSubmit = () => {
+    const enableSubmit = () => {
       let ownerFieldValue = this.ownerTarget.firstElementChild.value;
       let numberFieldValue = this.numberTarget.firstElementChild.value;
       const ownerRgx = /^[a-z .]+$/i;
@@ -135,7 +159,8 @@ export default class extends Controller {
         ownerRgx.test(ownerFieldValue) &&
         ownerFieldValue &&
         numberRgx.test(numberFieldValue) &&
-        numberFieldValue
+        numberFieldValue &&
+        !numberIsUniqueMessage
       ) {
         submitButton.classList.remove("disabled");
       }
@@ -145,7 +170,7 @@ export default class extends Controller {
       if (accepted_size.includes(fieldValue)) {
         add_class("is-valid");
         remove_class("is-invalid");
-        enableDisableSubmit();
+        enableSubmit();
       } else {
         remove_class("is-valid");
         add_class("is-invalid");
@@ -154,7 +179,7 @@ export default class extends Controller {
       }
     } else if (accepted_size.includes(fieldValue)) {
       add_class("is-valid");
-      enableDisableSubmit();
+      enableSubmit();
     } else {
       remove_class("is-valid");
       remove_class("is-invalid");
