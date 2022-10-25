@@ -11,7 +11,14 @@ class ThaalisController < ApplicationController
     def create
         @thaali = Thaali.new(thaali_params)
 
-        if @thaali.save
+        if params[:commit] == "Validate"
+            if Thaali.pluck(:number).include?(@thaali.number)
+                render turbo_stream: [ turbo_stream.update("not-unique", "but the thaali number is taken") ]
+            else
+                render turbo_stream: [ turbo_stream.update("not-unique", "") ]
+            end
+
+        elsif @thaali.save
             flash.now[:notice] = "Thaali number: #{@thaali.number} created!"
             render turbo_stream: [
                 turbo_stream.prepend("thaalis", @thaali),
@@ -37,7 +44,16 @@ class ThaalisController < ApplicationController
     def update
         @thaali = Thaali.find(params[:id])
 
-        if @thaali.update(thaali_params)
+        if params[:commit] == "Validate"
+            number = thaali_params[:number].to_i
+
+            if Thaali.pluck(:number).include?(number) && number != @thaali.number
+                render turbo_stream: [ turbo_stream.update("not-unique", "but the thaali number is taken") ]
+            else
+                render turbo_stream: [ turbo_stream.update("not-unique", "") ]
+            end
+
+        elsif @thaali.update(thaali_params)
             flash.now[:notice] = "Thaali number: #{@thaali.number} updated!"
             render turbo_stream: [
                 turbo_stream.prepend("thaalis", @thaali),

@@ -37,6 +37,7 @@ export default class extends Controller {
       if (numberRgx.test(fieldValue)) {
         add_class("is-valid");
         remove_class("is-invalid");
+        submit_validateButton();
         enableDisableSubmit();
       } else {
         remove_class("is-valid");
@@ -46,6 +47,7 @@ export default class extends Controller {
       }
     } else if (numberRgx.test(fieldValue)) {
       add_class("is-valid");
+      submit_validateButton();
       enableDisableSubmit();
     } else {
       remove_class("is-valid");
