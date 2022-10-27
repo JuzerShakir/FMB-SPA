@@ -4,6 +4,14 @@ class ThaalisController < ApplicationController
         @thaali = Thaali.new
     end
 
+    def search
+        @thaalis = Thaali.where('owner ILIKE ?', "%#{params[:thaali_name_search]}%")
+
+        render turbo_stream: [
+            turbo_stream.update("thaalis", partial: "thaalis/search_thaalis", locals: { thaalis: @thaalis } )
+        ]
+    end
+
     def new
         @thaali = Thaali.new
     end
