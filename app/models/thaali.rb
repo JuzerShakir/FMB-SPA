@@ -12,5 +12,5 @@ class Thaali < ApplicationRecord
     after_destroy_commit { broadcast_remove_to "thaalis" }
 
     scope :in_sequence, -> { order(number: :asc) }
-    scope :filter_by_owner, -> (owner_name) { where("owner ILIKE ?", "%#{owner_name}%") }
+    scope :filter_by_owner, -> (owner_name) { where("owner ILIKE ?", "%#{owner_name}%").order(number: :asc) }
 end
