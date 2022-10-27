@@ -48,7 +48,7 @@ class ThaalisController < ApplicationController
             number = thaali_params[:number].to_i
 
             if Thaali.pluck(:number).include?(number) && number != @thaali.number
-                render turbo_stream: [ turbo_stream.update("not-unique", "but the thaali number is taken") ]
+                render turbo_stream: [ turbo_stream.update("not-unique", "thaali number is taken") ]
             else
                 render turbo_stream: [ turbo_stream.update("not-unique", "") ]
             end
