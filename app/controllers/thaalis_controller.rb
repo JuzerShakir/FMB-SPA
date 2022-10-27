@@ -5,11 +5,12 @@ class ThaalisController < ApplicationController
     end
 
     def search
-        @thaalis = Thaali.filter_by_owner(params[:thaali_name_search])
+        @thaalis = params[:thaali_name_search].present? ?
+                Thaali.filter_by_owner(params[:thaali_name_search]) : Thaali.in_sequence
 
         render turbo_stream: [
-            turbo_stream.update("thaalis", partial: "thaalis/search_thaalis", locals: { thaalis: @thaalis } )
-        ]
+                turbo_stream.update("thaalis", partial: "thaalis/search_thaalis", locals: { thaalis: @thaalis } )
+            ]
     end
 
     def new
