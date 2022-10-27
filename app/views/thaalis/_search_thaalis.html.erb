@@ -1,7 +1,7 @@
 <% thaalis.each do | thaali | %>
     <tr id="<%= dom_id thaali %>">
         <th scope="row"><%= thaali.number %></th>
-        <td colspan="8"><%= thaali.owner %></td>
+        <td colspan="8"><%= highlight(thaali.owner, params[:thaali_name_search])%></td>
         <td><%= thaali.size %></td>
         <td>
             <span id="edit-button">
