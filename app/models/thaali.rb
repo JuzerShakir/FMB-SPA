@@ -7,10 +7,10 @@ class Thaali < ApplicationRecord
 
     validates :owner, format: { with: /\A[a-z .]+\z/i, message: "only alphabets allowed" }
 
-    scope :in_sequence, -> { order(number: :asc) }
-
     after_create_commit { broadcast_prepend_to "thaalis" }
     after_update_commit { broadcast_replace_to "thaalis" }
     after_destroy_commit { broadcast_remove_to "thaalis" }
 
+    scope :in_sequence, -> { order(number: :asc) }
+    scope :filter_by_owner, -> (owner_name) { where("owner ILIKE ?", "%#{owner_name}%") }
 end
