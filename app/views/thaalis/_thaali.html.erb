@@ -6,7 +6,6 @@
         <span id="edit-button">
             <%= link_to "Edit", edit_thaali_path(thaali), class: "btn btn-sm btn-primary me-2" %>
         </span>
-
         <span id="destroy-button">
             <%= button_to "Delete", thaali_path(thaali), class: "btn btn-sm btn-danger ms-2", method: :delete, data: { turbo_confirm: "Delete thaali number #{thaali.number} entry?"},  form: {style: 'display:inline-block;'} %>
         </span>
