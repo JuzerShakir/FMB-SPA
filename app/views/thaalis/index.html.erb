@@ -1,9 +1,11 @@
 <h1 class="text-center">FMB</h1>
 <h3 class="text-center">Amakin Mohammadiyah - Dombivili</h3>
 
-<p class="my-5 text-center text-primary fs-5">
+<p class="my-4 text-center text-primary fs-5">
     Total Number of thaalis distributed: <span class="fw-bold" id="thaali_counter"><%= Thaali.count %></span>
 </p>
+
+<p class="text-center fst-italic text-secondary">Developed & Designed By Juzer Shakir</p>
 
 <turbo_frame id='new-thaali-form' data-controller="live-validation">
     <%= render 'thaalis/form', thaali: @thaali %>
@@ -11,7 +13,7 @@
 
 <div>
     <%= turbo_stream_from "thaalis" %>
-    <table class="table table-hover text-center table-striped mt-5">
+    <table class="table table-hover text-center table-striped mt-5 table-borderless">
         <thead>
             <tr>
                 <th scope="col">Thaali Number</th>
