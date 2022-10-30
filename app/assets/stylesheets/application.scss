@@ -51,3 +51,9 @@ select.form-select {
   color: black;
   border: none;
 }
+
+#flash {
+  position: absolute;
+  z-index: 2;
+  right: 10px;
+}
