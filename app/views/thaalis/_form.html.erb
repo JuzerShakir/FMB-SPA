@@ -6,9 +6,9 @@
       <%= f.number_field :number, class:"form-control", placeholder: "53", id: "floatingInput"%>
       <%= f.label "Thaali #", for: "floatingInput" , class: "ps-4 text-secondary"%>
 
-      <div class="valid-feedback">Looks good!</div>
-      <div class="invalid-feedback"></div>
-      <div id="not-unique" class="text-danger" style="font-size:small"></div>
+      <div class="valid-feedback floating">Looks good!</div>
+      <div class="invalid-feedback floating"></div>
+      <div id="not-unique" class="text-danger floating" style="font-size:small"></div>
       <%= inline_error_for(:number, thaali) %>
     </div>
 
@@ -17,8 +17,8 @@
       <%= f.text_field :owner, class:"form-control", placeholder: "Juzer Shakir", id: "floatingInput"%>
       <%= f.label "Name", for: "floatingInput" , class: "ps-4 text-secondary"%>
 
-      <div class="valid-feedback">Looks good!</div>
-      <div class="invalid-feedback"></div>
+      <div class="valid-feedback floating">Looks good!</div>
+      <div class="invalid-feedback floating"></div>
       <%= inline_error_for(:owner, thaali) %>
     </div>
 
@@ -27,8 +27,8 @@
       <%= f.collection_select :size, Thaali.sizes.keys.map{ |size| [size, size.humanize]}, :first, :second, {prompt: "Choose"}, { class: "form-select"} %>
       <%= f.label "Thaali Size", for: "floatingInput" , class: "ps-4 text-secondary"%>
 
-      <div class="valid-feedback">Looks good!</div>
-      <div class="invalid-feedback"></div>
+      <div class="valid-feedback floating">Looks good!</div>
+      <div class="invalid-feedback floating"></div>
       <%= inline_error_for(:size, thaali) %>
     </div>
 
