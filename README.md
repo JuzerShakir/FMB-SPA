@@ -1,7 +1,7 @@
 <div align="center">
   <img src="app/assets/images/thaali-logo.png" />
   <h2>Faiz ul Mawaid il Burhaniyah (FMB)</h2>
-  <p>Keeps records of all thaalis that are being distributed in a city.</p>
+  <p>Keeps records of all 'thaalis' (Lunch/Dinner Boxes) distributed by an NPO, 'Fazi-ul-Mawaid-ul-Burhaniyah', in a city..</p>
 </div>
 
 <div align="center">
